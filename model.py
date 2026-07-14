@@ -21,8 +21,11 @@ def softmax(logits, axis=-1):
     probs = exps / np.sum(exps, axis=axis)
     return probs
 
-# Step 3 - gather_token_logprobs (not yet solved)
-# TODO: implement
+# Step 3 - gather_token_logprobs
+def gather_token_logprobs(log_probs, token_ids):
+    token_ids = token_ids[..., None]
+    log_probs_tokens = np.take_along_axis(log_probs, token_ids, axis=-1)
+    return log_probs_tokens.squeeze(-1)
 
 # Step 4 - masked_sequence_logprob (not yet solved)
 # TODO: implement
