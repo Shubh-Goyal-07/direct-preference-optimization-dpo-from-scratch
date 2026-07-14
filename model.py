@@ -27,8 +27,9 @@ def gather_token_logprobs(log_probs, token_ids):
     log_probs_tokens = np.take_along_axis(log_probs, token_ids, axis=-1)
     return log_probs_tokens.squeeze(-1)
 
-# Step 4 - masked_sequence_logprob (not yet solved)
-# TODO: implement
+# Step 4 - masked_sequence_logprob
+def masked_sequence_logprob(token_logprobs, mask):
+    return np.sum(token_logprobs*mask, axis=-1)
 
 # Step 5 - init_policy_params (not yet solved)
 # TODO: implement
