@@ -31,8 +31,17 @@ def gather_token_logprobs(log_probs, token_ids):
 def masked_sequence_logprob(token_logprobs, mask):
     return np.sum(token_logprobs*mask, axis=-1)
 
-# Step 5 - init_policy_params (not yet solved)
-# TODO: implement
+# Step 5 - init_policy_params
+def init_policy_params(vocab_size, d_model, rng=None):
+    ran_gen = rng if rng else np.random.default_rng()
+    
+    params = {
+        "embed": ran_gen.normal(loc=0.0, scale=0.02, size=(vocab_size, d_model)),
+        "W_out": ran_gen.normal(loc=0.0, scale=0.02, size=(d_model, vocab_size)),
+        "b_out": np.zeros(vocab_size)
+    }
+
+    return params
 
 # Step 6 - policy_token_logits (not yet solved)
 # TODO: implement
